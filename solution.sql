@@ -48,6 +48,13 @@ with
             0.8 as start_position,
             1.00 as end_position,
             'with' as direction
+        union
+        select
+            'b' as segment_id,
+            2 as road_sequence_id,
+            0.0 as start_position,
+            1.00 as end_position,
+            'with' as direction            
     ),
 
     generate_merge_key as (
