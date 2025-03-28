@@ -1,7 +1,7 @@
 # merge-rows
 
 We have the following table with mappings between a segment and parts of a road sequence.
-We want to merge rows in this table that represent contiguous or overlapping parts of the same road sequence and shares the same direction (i.e. row 2-4 and 5-6 should be merged)
+We want to merge rows in this table that represent adjacent or overlapping parts of the same road sequence and shares the same direction (i.e. row 2-4 and 5-6 should be merged)
 
 | segment_id         | road_sequence_id   | start_position     | end_position       | direction          |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
