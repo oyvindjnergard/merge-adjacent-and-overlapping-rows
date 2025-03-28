@@ -29,8 +29,8 @@ We want to merge rows in this table that represent contiguous or overlapping par
 
 <details>
   <summary>Hints:</summary>
-- https://www.postgresql.org/docs/current/functions-window.html
-- https://www.postgresql.org/docs/current/functions-conditional.html
-- https://www.postgresql.org/docs/current/queries-with.html
+1. https://www.postgresql.org/docs/current/functions-window.html
+2. https://www.postgresql.org/docs/current/functions-conditional.html
+3. https://www.postgresql.org/docs/current/queries-with.html
 </details>
 
