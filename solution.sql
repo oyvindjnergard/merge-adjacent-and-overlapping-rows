@@ -62,15 +62,13 @@ with
             *,
             case
                 when
-                    start_position > lag(end_position) over (
-                        partition by segment_id, road_sequence_id, direction
-                        order by start_position
+                    start_position > coalesce(
+                        lag(end_position) over (
+                            partition by segment_id, road_sequence_id, direction
+                            order by start_position
+                        ),
+                        -1
                     )
-                    or lag(end_position) over (
-                        partition by segment_id, road_sequence_id, direction
-                        order by start_position
-                    )
-                    is null
                 then 1
                 else 0
             end as merge_key
