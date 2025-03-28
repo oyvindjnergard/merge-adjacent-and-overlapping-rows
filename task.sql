@@ -2,54 +2,54 @@ with
     base as (
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.0 as startposisjon,
-            0.1 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.0 as start_position,
+            0.1 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.1 as startposisjon,
-            0.15 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.1 as start_position,
+            0.15 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.15 as startposisjon,
-            0.2 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.15 as start_position,
+            0.2 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.25 as startposisjon,
-            0.5 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.25 as start_position,
+            0.5 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.3 as startposisjon,
-            0.4 as sluttposisjon,
-            'against' as retning
+            1 as road_sequence_id,
+            0.3 as start_position,
+            0.4 as end_position,
+            'against' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.45 as startposisjon,
-            0.7 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.45 as start_position,
+            0.7 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.8 as startposisjon,
-            1.00 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.8 as start_position,
+            1.00 as end_position,
+            'with' as direction
     )
 
 select *
 from base
-order by retning, startposisjon
+order by direction, start_position

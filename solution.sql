@@ -2,52 +2,52 @@ with
     base as (
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.0 as startposisjon,
-            0.1 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.0 as start_position,
+            0.1 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.1 as startposisjon,
-            0.15 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.1 as start_position,
+            0.15 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.15 as startposisjon,
-            0.2 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.15 as start_position,
+            0.2 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.25 as startposisjon,
-            0.5 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.25 as start_position,
+            0.5 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.3 as startposisjon,
-            0.4 as sluttposisjon,
-            'against' as retning
+            1 as road_sequence_id,
+            0.3 as start_position,
+            0.4 as end_position,
+            'against' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.45 as startposisjon,
-            0.7 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.45 as start_position,
+            0.7 as end_position,
+            'with' as direction
         union
         select
             'a' as segment_id,
-            1 as veglenkesekvens_id,
-            0.8 as startposisjon,
-            1.00 as sluttposisjon,
-            'with' as retning
+            1 as road_sequence_id,
+            0.8 as start_position,
+            1.00 as end_position,
+            'with' as direction
     ),
 
     generate_merge_key as (
@@ -55,13 +55,13 @@ with
             *,
             case
                 when
-                    startposisjon > lag(sluttposisjon) over (
-                        partition by segment_id, veglenkesekvens_id, retning
-                        order by startposisjon
+                    start_position > lag(end_position) over (
+                        partition by segment_id, road_sequence_id, direction
+                        order by start_position
                     )
-                    or lag(sluttposisjon) over (
-                        partition by segment_id, veglenkesekvens_id, retning
-                        order by startposisjon
+                    or lag(end_position) over (
+                        partition by segment_id, road_sequence_id, direction
+                        order by start_position
                     )
                     is null
                 then 1
@@ -74,8 +74,8 @@ with
         select
             *,
             sum(merge_key) over (
-                partition by segment_id, veglenkesekvens_id, retning
-                order by startposisjon
+                partition by segment_id, road_sequence_id, direction
+                order by start_position
             ) as merge_group
         from generate_merge_key
     ),
@@ -83,14 +83,14 @@ with
     merge_rows as (
         select
             segment_id,
-            veglenkesekvens_id,
-            min(startposisjon) as startposisjon,
-            max(sluttposisjon) as sluttposisjon,
-            retning
+            road_sequence_id,
+            min(start_position) as start_position,
+            max(end_position) as end_position,
+            direction
         from generate_merge_group
-        group by segment_id, veglenkesekvens_id, retning, merge_group
+        group by segment_id, road_sequence_id, direction, merge_group
     )
 
 select *
 from merge_rows
-order by retning, startposisjon
+order by direction, start_position
