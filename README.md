@@ -26,3 +26,8 @@ We want to merge rows in this table that represent contiguous or overlapping par
 | a                  | 1                  | 0.25               | 0.7                | with               |
 | a                  | 1                  | 0.8                | 1.0                | with               |
 | b                  | 2                  | 0.0                | 1.0                | with               |
+
+Hints:
+- https://www.postgresql.org/docs/current/functions-window.html
+- https://www.postgresql.org/docs/current/functions-conditional.html
+- https://www.postgresql.org/docs/current/queries-with.html
