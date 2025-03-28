@@ -100,4 +100,4 @@ with
 
 select *
 from merge_rows
-order by direction, start_position
+order by segment_id,direction, start_position
